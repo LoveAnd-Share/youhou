@@ -22,7 +22,7 @@
         hrefList[i] = imgList[i].src
     }
     //自增编号
-    function setInterval(num) {
+    function setNumber(num) {
             var len = 3 //显示的长度，如果以0001则长度为4
             num = parseInt(num, 10) + 1//转数据类型，以十进制自增
             num = num.toString()//转为字符串
@@ -45,15 +45,27 @@
     async function downFileAll(){
         console.log('开始下载');
         for(let i =j;i < hrefList.length;i++){
-            j = i;
-            var number = setInterval(i);
+            var number = setNumber(i);
             var a = document.createElement('a');
             a.setAttribute('href',hrefList[i]);
             a.setAttribute('download',h1title[0].innerHTML+number);
+            a.setAttribute('class',"pictureitem");
+            htitle[0].appendChild(a)
+            /*if(i != 0&&i % 10 ==0){
+                await pause(1000)//谷歌批量下载一次十个任务
+            }
+            a.click();*/
+        }
+        var alist = document.getElementsByClassName("pictureitem")
+        for(let i = j;i <alist.length;i++)
+        {
+            j = i;
+            console.log("sds")
+            console.log()
             if(i != 0&&i % 10 ==0){
                 await pause(1000)//谷歌批量下载一次十个任务
             }
-            a.click();
+            alist[i].click()
         }
         if(++j == hrefList.length)
         {
